@@ -48,6 +48,12 @@ describe('backend-express-template routes', () => {
       iat: expect.any(Number),
     });
   });
+  it('should successfully logout user', async () => {
+    const [agent] = await registerAndLogin();
+    const res = await agent.delete('/api/v1/users/sessions');
+    expect(res.status).toEqual(200);
+    expect(res.body.message).toEqual('You signed out successfully!');
+  });
   afterAll(() => {
     pool.end();
   });
