@@ -18,3 +18,8 @@ CREATE TABLE secrets (
   description VARCHAR,
   createdAt INT
 );
+
+INSERT INTO secrets (title, description, createdAt) VALUES
+('top top top secret', 'Portland is weird', 01012015 ),
+('shhhh', 'Being a nerd is cool', null),
+('secret', null, null)
