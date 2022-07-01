@@ -7,7 +7,13 @@ const UserService = require('../lib/services/UserService');
 const mockUser = {
   firstName: 'Test',
   lastName: 'User',
-  email: 'test@test.com',
+  email: 'test@defense.gov',
+  password: '123456',
+};
+const badUser = {
+  firstName: 'Test',
+  lastName: 'User',
+  email: 'test@example.gov',
   password: '123456',
 };
 
@@ -37,6 +43,12 @@ describe('backend-express-template routes', () => {
       lastName,
       email,
     });
+  });
+  it('not allow a new user with incorrect email', async () => {
+    const res = await request(app).post('/api/v1/users').send(badUser);
+    expect(res.status).toEqual(500);
+
+    expect(res.body.message).toEqual('You are not authorized');
   });
   it('returns the current user', async () => {
     const [agent, user] = await registerAndLogin();
